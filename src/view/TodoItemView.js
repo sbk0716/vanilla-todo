@@ -19,6 +19,7 @@ export class TodoItemView {
                                     <button class="delete">x</button>
                                 </li>`;
     const inputCheckboxElement = todoItemElement.querySelector('.checkbox');
+    console.info('[TodoItemView]execute addEventListener() to listen for change event');
     inputCheckboxElement.addEventListener('change', () => {
       // コールバック関数に変更
       onUpdateTodo({
@@ -27,6 +28,7 @@ export class TodoItemView {
       });
     });
     const deleteButtonElement = todoItemElement.querySelector('.delete');
+    console.info('[TodoItemView]execute addEventListener() to listen for click event');
     deleteButtonElement.addEventListener('click', () => {
       // コールバック関数に変更
       onDeleteTodo({

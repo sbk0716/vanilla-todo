@@ -8,8 +8,9 @@ export class TodoItemModel {
    * @param {{ title: string, completed: boolean }}
    */
   constructor({ title, completed }) {
-    // idは自動的に連番となりそれぞれのインスタンス毎に異なるものとする
     todoIdx += 1;
+    console.info(`execute TodoItemModel constructor[ID: ${todoIdx}]`);
+    // idは自動的に連番となりそれぞれのインスタンス毎に異なるものとする
     this.id = todoIdx;
     this.title = title;
     this.completed = completed;

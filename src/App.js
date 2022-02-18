@@ -5,6 +5,7 @@ import { TodoListModel } from './model/TodoListModel.js';
 
 export class App {
   constructor() {
+    console.info('execute App constructor');
     this.todoListView = new TodoListView();
     this.todoListModel = new TodoListModel([]);
   }
@@ -14,7 +15,9 @@ export class App {
    * @param {string} title
    */
   handleAdd(title) {
-    this.todoListModel.addTodo(new TodoItemModel({ title, completed: false }));
+    console.info('execute App handleAdd', title);
+    const newTodoItem = new TodoItemModel({ title, completed: false });
+    this.todoListModel.addTodo(newTodoItem);
   }
 
   /**
@@ -22,6 +25,7 @@ export class App {
    * @param {{ id:number, completed: boolean }}
    */
   handleUpdate({ id, completed }) {
+    console.info('execute App handleUpdate', id, completed);
     this.todoListModel.updateTodo({ id, completed });
   }
 
@@ -30,31 +34,40 @@ export class App {
    * @param {{ id: number }}
    */
   handleDelete({ id }) {
+    console.info('execute App handleDelete', id);
     this.todoListModel.deleteTodo({ id });
   }
 
   mount() {
+    console.info('[APP]execute App mount');
     const formElement = document.querySelector('#js-form');
     const inputElement = document.querySelector('#js-form-input');
     const todoItemCountElement = document.querySelector('#js-todo-count');
     const containerElement = document.querySelector('#js-todo-list');
+    console.info('[APP]execute this.todoListModel.onChange() to add multiple listeners to app instance');
     this.todoListModel.onChange(() => {
       const todoItems = this.todoListModel.getTodoItems();
       const todoListElement = this.todoListView.createElement(todoItems, {
         // Appに定義したリスナー関数を呼び出す
         onUpdateTodo: ({ id, completed }) => {
+          console.info('[APP]execute this.handleUpdate()');
           this.handleUpdate({ id, completed });
         },
         onDeleteTodo: ({ id }) => {
+          console.info('[APP]execute this.handleDelete()');
           this.handleDelete({ id });
         },
       });
+      console.info('[APP]execute render()');
       render(todoListElement, containerElement);
+      console.info('[APP]execute this.todoListModel.getTotalCount()');
       todoItemCountElement.textContent = `Todoアイテム数: ${this.todoListModel.getTotalCount()}`;
     });
 
+    console.info('[APP]execute addEventListener() to listen for form submit');
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();
+      console.info('[APP]execute this.handleAdd()');
       this.handleAdd(inputElement.value);
       inputElement.value = '';
     });
