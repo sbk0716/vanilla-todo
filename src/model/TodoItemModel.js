@@ -9,7 +9,7 @@ export class TodoItemModel {
    */
   constructor({ title, completed }) {
     todoIdx += 1;
-    console.info(`execute TodoItemModel constructor[ID: ${todoIdx}]`);
+    console.info(`[TodoItemModel]execute TodoItemModel constructor[ID: ${todoIdx}]`);
     // idは自動的に連番となりそれぞれのインスタンス毎に異なるものとする
     this.id = todoIdx;
     this.title = title;

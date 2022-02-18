@@ -1,6 +1,6 @@
 export class EventEmitter {
   constructor() {
-    console.info('execute EventEmitter constructor');
+    console.info('[EventEmitter]execute constructor');
     // 登録する [イベント名, Set(リスナー関数)] を管理するMap
     this._listeners = new Map();
   }
@@ -11,7 +11,7 @@ export class EventEmitter {
    * @param {Function} listener イベントリスナー
    */
   addEventListener(type, listener) {
-    console.info('execute EventEmitter addEventListener');
+    console.info('[EventEmitter]execute addEventListener');
     console.info('event type= ', type);
     // 指定したイベントに対応するSetを作成しリスナー関数を登録する
     if (!this._listeners.has(type)) {
@@ -26,7 +26,7 @@ export class EventEmitter {
    * @param {string} type イベント名
    */
   emit(type) {
-    console.info('execute EventEmitter emit');
+    console.info('[EventEmitter]execute emit');
     console.info('event type= ', type);
     // 指定したイベントに対応するSetを取り出し、すべてのリスナー関数を呼び出す
     const listenerSet = this._listeners.get(type);
@@ -46,7 +46,7 @@ export class EventEmitter {
    * @param {Function} listener イベントリスナー
    */
   removeEventListener(type, listener) {
-    console.info('execute EventEmitter removeEventListener');
+    console.info('[EventEmitter]execute removeEventListener');
     console.info('event type= ', type);
     console.info('event listener= ', listener);
     // 指定したイベントに対応するSetを取り出し、該当するリスナー関数を削除する
