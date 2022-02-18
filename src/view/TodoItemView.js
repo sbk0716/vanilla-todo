@@ -9,6 +9,8 @@ export class TodoItemView {
    * @returns {Element}
    */
   createElement(todoItem, { onUpdateTodo, onDeleteTodo }) {
+    // 完了: checked属性をつけ、削除ボタン(x)を追加する
+    // 未完了: checked属性を外し、削除ボタン(x)を追加する
     const todoItemElement = todoItem.completed
       ? element`<li><input type="checkbox" class="checkbox" checked>
                                     <s>${todoItem.title}</s>
@@ -18,6 +20,7 @@ export class TodoItemView {
                                     ${todoItem.title}
                                     <button class="delete">x</button>
                                 </li>`;
+    // チェックボックスがトグルしたときのイベントにリスナー関数を登録
     const inputCheckboxElement = todoItemElement.querySelector('.checkbox');
     console.info('[TodoItemView]execute addEventListener() to listen for change event');
     inputCheckboxElement.addEventListener('change', () => {
@@ -27,6 +30,7 @@ export class TodoItemView {
         completed: !todoItem.completed,
       });
     });
+    // 削除ボタン(x)がクリックされたときにTodoListModelからアイテムを削除する
     const deleteButtonElement = todoItemElement.querySelector('.delete');
     console.info('[TodoItemView]execute addEventListener() to listen for click event');
     deleteButtonElement.addEventListener('click', () => {

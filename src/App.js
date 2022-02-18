@@ -44,31 +44,41 @@ export class App {
     const inputElement = document.querySelector('#js-form-input');
     const todoItemCountElement = document.querySelector('#js-todo-count');
     const containerElement = document.querySelector('#js-todo-list');
-    console.info('[@APP]execute this.todoListModel.onChange() to add multiple listeners to app instance');
+    console.info('[@APP]execute this.todoListModel.onChange() to add multiple listeners');
+    // TodoListModelの状態が更新されたら表示を更新する
     this.todoListModel.onChange(() => {
+      console.info('The state of TodoListModel has changed!!!!!');
+      // それぞれのTodoItem要素をtodoListElement以下へ追加する
       const todoItems = this.todoListModel.getTodoItems();
       const todoListElement = this.todoListView.createElement(todoItems, {
-        // Appに定義したリスナー関数を呼び出す
+        // Todoアイテムが更新イベントを発生したときに呼ばれるリスナー関数
         onUpdateTodo: ({ id, completed }) => {
           console.info('[@APP]execute this.handleUpdate()');
           this.handleUpdate({ id, completed });
         },
+        // Todoアイテムが削除イベントを発生したときに呼ばれるリスナー関数
         onDeleteTodo: ({ id }) => {
           console.info('[@APP]execute this.handleDelete()');
           this.handleDelete({ id });
         },
       });
       console.info('[@APP]execute html-util render()');
+      // コンテナ要素の中身(containerElement)をTodoリストをまとめるList要素(todoListElement)で上書きする
       render(todoListElement, containerElement);
       console.info('[@APP]execute this.todoListModel.getTotalCount()');
+      // アイテム数の表示を更新
       todoItemCountElement.textContent = `Todoアイテム数: ${this.todoListModel.getTotalCount()}`;
     });
 
     console.info('[@APP]execute addEventListener() to listen for form submit');
+    // フォームを送信したら、新しいTodoItemModelを追加する
     formElement.addEventListener('submit', (event) => {
+      console.info('The form has been submitted!!!!!');
+      // 本来のsubmitイベントの動作を止める
       event.preventDefault();
       console.info('[@APP]execute this.handleAdd()');
       this.handleAdd(inputElement.value);
+      // 入力欄を空文字列にしてリセットする
       inputElement.value = '';
     });
   }
