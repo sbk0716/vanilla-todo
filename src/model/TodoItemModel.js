@@ -9,7 +9,8 @@ export class TodoItemModel {
    */
   constructor({ title, completed }) {
     // idは自動的に連番となりそれぞれのインスタンス毎に異なるものとする
-    this.id = todoIdx++;
+    todoIdx += 1;
+    this.id = todoIdx;
     this.title = title;
     this.completed = completed;
   }

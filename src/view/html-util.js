@@ -34,8 +34,9 @@ export function element(strings, ...values) {
  * @param {Element} containerElement コンテナ要素
  */
 export function render(bodyElement, containerElement) {
+  const targetElement = containerElement;
   // containerElementの中身を空にする
-  containerElement.innerHTML = '';
+  targetElement.innerHTML = '';
   // containerElementの直下にbodyElementを追加する
-  containerElement.appendChild(bodyElement);
+  targetElement.appendChild(bodyElement);
 }
