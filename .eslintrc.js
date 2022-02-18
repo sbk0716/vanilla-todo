@@ -11,6 +11,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+    'prefer-const': 'error',
     'import/extensions': ['error', 'ignorePackages'],
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
