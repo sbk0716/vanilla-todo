@@ -1,0 +1,14 @@
+{
+  "name": "vanilla-todo",
+  "version": "1.0.0",
+  "description": "## Project structure",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn serve -p 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}
